@@ -8,8 +8,6 @@ Last week I completed my 3rd Data Science Project.  I analyzed course data from 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 
-<h2>Predicting Your Students' Grades</h2>
-
 <script>
 
 var margin = {top: 50, right: 50, bottom: 150, left: 40},
