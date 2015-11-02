@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Project 3: Classifying MOOCs and D3
+title: Third Project
 ---
 
 Last week I completed my 3rd Data Science Project.  I analyzed course data from 16 different MOOCs and used a variety of machine learning algorithms to fine tune my predicitve models.  Along the way I learned about several different types of classification, imputing missing data and D3 visualizations.
