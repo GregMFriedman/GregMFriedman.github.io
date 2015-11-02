@@ -1,0 +1,229 @@
+---
+layout: post
+title: d3 Visualization
+---
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  font: 14px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.x.axis path {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+.bar:hover {
+  fill: orangered ;
+}
+
+
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
+</style>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+
+<h2>Predicting Your Students' Grades</h2>
+
+<script>
+
+var margin = {top: 50, right: 50, bottom: 150, left: 40},
+    width = 1050 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var x0 = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
+
+var x1 = d3.scale.ordinal();
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var formatPercent = d3.format(".0%");
+
+var color = d3.scale.ordinal()
+    .range(["#98abc5", 'white', "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+
+var xAxis = d3.svg.axis()
+    .scale(x0)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .tickFormat(d3.format(".2s"));
+
+
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong>Accuracy:</strong> <span style='color:red'>" + Math.round(d.value) + "</span><strong> %</strong>";
+  })
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+ d3.csv("comp.csv", function(error, data) {
+  if (error) throw error;
+
+  var modelNames = d3.keys(data[0]).filter(function(key) { return key == "Base"; });
+
+  data.forEach(function(d) {
+    d.scores = modelNames.map(function(name) { return {name: name, value: +d[name]}; });
+  });
+
+  x0.domain(data.map(function(d) { return d.Class; }));
+  x1.domain(modelNames).rangeRoundBands([0, x0.rangeBand()]);
+  y.domain([0, d3.max(data, function(d) { return d3.max(d.scores, function(d) { return d.value; }); })]);
+
+  svg.append("g")
+     svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+        .selectAll("text")  
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-65)" 
+                });
+
+  svg.call(tip);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Accuracy Score");
+
+  var Class = svg.selectAll(".Class")
+      .data(data)
+    .enter().append("g")
+      .attr("class", "g")
+      .attr("transform", function(d) { return "translate(" + x0(d.Class) + ",0)"; });
+
+
+  Class.selectAll("rect")
+      .data(function(d) { return d.scores; })
+    .enter().append("rect")
+      .attr("width", x1.rangeBand())
+      .attr("x", function(d) { return x1(d.name); })
+      .attr("y", function(d) { return y(d.value); })
+      .attr('id', function(d) {return d.name;})
+      .attr("class", "bar")
+      .attr("height", function(d) { return height - y(d.value); })
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+      .on("click", animate);
+
+      
+
+  var legend = svg.selectAll(".legend")
+      .data(modelNames.slice().reverse())
+    .enter().append("g")
+      .attr("class", "legend")
+      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+  legend.append("rect")
+      .attr("x", width + 40)
+      .attr("width", 10)
+      .attr("height", 10)
+      .attr('id', function(d) {return d.name;})
+      .style("fill", color);
+
+      
+
+  legend.append("text")
+      .attr("x", width + 30)
+      .attr("y", 5)
+      .attr("dy", ".35em")
+      .style("text-anchor", "end")
+      .text(function(d) { return d; });
+
+
+
+function animate() {
+    d3.select(this).transition()
+        .duration(500)
+        .ease('elastic')
+        .attr("y", function(d) { return y(d.value + 20); })
+        .attr("height", function(d) { return height - y(d.value+20); })
+      .transition()
+        .delay(500)
+        .attr("y", function(d) { return y(d.value); })
+        .attr("height", function(d) { return height - y(d.value); })
+
+};
+
+  function somethingCool() {
+  d3.select(this)
+  	.attr("height", function(d) { return height - y(d.value); })
+    .on('mouseover', tip.show)
+    .on('mouseout', tip.hide)
+    .transition()
+    .duration(5000)
+    .ease("elastic")
+    .delay(100)
+      .style("fill", "#7b6888")
+      .style("stroke-width","0em");
+}
+
+d3.selectAll("#G-Model").on("mouseover",somethingCool);
+
+});
+
+    </script>
+  </body>
+</html>
