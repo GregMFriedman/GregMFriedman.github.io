@@ -5,6 +5,7 @@ title: Third Project
 
 Last week I completed my 3rd Data Science Project.  I analyzed course data from 16 different MOOCs and used a variety of machine learning algorithms to fine tune my predicitve models.  Along the way I learned about several different types of classification, imputing missing data and D3 visualizations.  Speaking of D3 visualizations, here is a D3 bar-chart that shows the accuracies of the baseline "dumb" predictors before any deeper analysis.
 
+<html>
 <!DOCTYPE html>
 <meta charset="utf-8">
 <style>
