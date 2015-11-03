@@ -5,8 +5,18 @@ title: Third Project
 
 Last week I completed my 3rd Data Science Project.  I analyzed course data from 16 different MOOCs and used a variety of machine learning algorithms to fine tune my predicitve models.  Along the way I learned about several different types of classification, imputing missing data and D3 visualizations.  Speaking of D3 visualizations, here is a D3 bar-chart that shows the accuracies of the baseline "dumb" predictors before any deeper analysis.
 
+<center>
+	<div border="black">
+		<h2>Dumbly Predicting Student Grades</h2>
+		<svg id="dumb">
+		</svg>
+	</div>
+</center>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+
+<h2>Predicting Your Students' Grades</h2>
 
 <script>
 
@@ -44,7 +54,7 @@ var tip = d3.tip()
     return "<strong>Accuracy:</strong> <span style='color:red'>" + Math.round(d.value) + "</span><strong> %</strong>";
   })
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#dumb").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -165,6 +175,9 @@ d3.selectAll("#G-Model").on("mouseover",somethingCool);
 });
 
     </script>
+
+
+
 
 The main point of this project was to explore different types of classification techniques such as **Logistic Regression, Gaussian Naive Bayes, K Nearest Neighbors, Support Vector Machines, Decision Trees** and **Random Forests**.  In order to use these models, I needed to look at an aspect of the data set that was categorical.  I noticed that one feature of the data was level of education, which was classified into **less than secondary, Secondary, Bachelor's Degree, Master's Degree or Doctorate**.  I ended up drawing a line between Secondary and Bachelor's Degree and making it a binary classification exercise.  
 
