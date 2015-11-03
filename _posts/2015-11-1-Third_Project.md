@@ -60,7 +60,27 @@ var svg = d3.select("#dumb").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
- d3.csv('https://github.com/GregMFriedman/GregMFriedman.github.io/blob/master/assets/comp.csv', function(error, data) {
+modelData =
+['Class,Base,G-Model
+Intro_CompSci_Harv,19.7862454746,57.1877166506
+Justice,47.1685884177,71.5951936552
+Structures,45.7753519608,75.8941235671
+Global_Health_Env,63.4820617175,79.169039083
+Intro_Bio,47.4930006434,79.687749713
+HealthStat,68.5200743917,82.6829036251
+Circuits_and_Elec_Spr,62.5998652991,84.63528527
+ElectroMag,74.2652052192,86.6384926952
+Circuits_and_Elec_Fall,75.4456226181,87.3262627646
+Intro_CompSci_MIT_Fall,81.9316063793,88.6688045331
+GreekHeroes,77.4273735555,88.9912688863
+Intro_CompSci_MIT_Spr,73.8903280551,89.0648281706
+Mechanics_Review,84.5439970577,89.718087613
+SolidStateChem_Spring,74.2678806967,89.943978945
+SolidStateChem_Fall,82.8472904661,91.2467070713
+GlobalPoverty,88.2424360125,92.7237244883']
+
+
+ d3.csv(modelData, function(error, data) {
   if (error) throw error;
 
   var modelNames = d3.keys(data[0]).filter(function(key) { return key == "Base"; });
