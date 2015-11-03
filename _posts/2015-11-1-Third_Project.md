@@ -54,7 +54,7 @@ var tip = d3.tip()
     return "<strong>Accuracy:</strong> <span style='color:red'>" + Math.round(d.value) + "</span><strong> %</strong>";
   })
 
-var svg = d3.select("div#dumb").append("svg")
+var svg = d3.select("#dumb").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
