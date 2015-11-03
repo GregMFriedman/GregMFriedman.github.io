@@ -60,7 +60,7 @@ var svg = d3.select("#dumb").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-modelData.csv =
+var modelData.csv =
 [Class,Base,G-Model
 Intro_CompSci_Harv,19.7862454746,57.1877166506
 Justice,47.1685884177,71.5951936552
