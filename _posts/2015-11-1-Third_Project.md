@@ -60,7 +60,7 @@ var svg = d3.select("#dumb").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
- d3.csv("https://github.com/GregMFriedman/ds5/tree/master/projects/03-mcnulty/greg/comp.csv", function(error, data) {
+ d3.csv('https://github.com/GregMFriedman/GregMFriedman.github.io/blob/master/assets/comp.csv', function(error, data) {
   if (error) throw error;
 
   var modelNames = d3.keys(data[0]).filter(function(key) { return key == "Base"; });
