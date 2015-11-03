@@ -60,7 +60,7 @@ var svg = d3.select("#dumb").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var modelData.csv =
+var modelData =
 ['Class,Base,G-Model
 Intro_CompSci_Harv,19.7862454746,57.1877166506
 Justice,47.1685884177,71.5951936552
@@ -80,7 +80,7 @@ SolidStateChem_Fall,82.8472904661,91.2467070713
 GlobalPoverty,88.2424360125,92.7237244883'];
 
 
- d3.csv(modelData.csv, function(error, data) {
+ d3.csv(modelData, function(error, data) {
   if (error) throw error;
 
   var modelNames = d3.keys(data[0]).filter(function(key) { return key == "Base"; });
