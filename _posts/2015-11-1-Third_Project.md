@@ -18,7 +18,7 @@ Last week I completed my 3rd Data Science Project.  I analyzed course data from 
 
 <script>
 
-function plotGraph1() {
+$(document).ready(function() {
 
 var margin = {top: 50, right: 50, bottom: 150, left: 40},
     width = 1050 - margin.left - margin.right,
@@ -54,13 +54,13 @@ var tip = d3.tip()
     return "<strong>Accuracy:</strong> <span style='color:red'>" + Math.round(d.value) + "</span><strong> %</strong>";
   })
 
-var svg = d3.select("#dumb").append("svg")
+var svg = d3.select("div#dumb").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
- d3.csv("comp.csv", function(error, data) {
+ d3.csv("https://github.com/GregMFriedman/ds5/tree/master/projects/03-mcnulty/greg/comp.csv", function(error, data) {
   if (error) throw error;
 
   var modelNames = d3.keys(data[0]).filter(function(key) { return key == "Base"; });
@@ -174,8 +174,6 @@ d3.selectAll("#G-Model").on("mouseover",somethingCool);
 
 });
 }
-
-plotGraph1();
 
     </script>
 
