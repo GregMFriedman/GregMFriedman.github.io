@@ -18,7 +18,7 @@ Last week I completed my 3rd Data Science Project.  I analyzed course data from 
 
 <script>
 
-$(document).ready(function() {
+function graphPlot1() {
 
 var margin = {top: 50, right: 50, bottom: 150, left: 40},
     width = 1050 - margin.left - margin.right,
@@ -175,6 +175,7 @@ d3.selectAll("#G-Model").on("mouseover",somethingCool);
 });
 }
 
+graphPlot1();
     </script>
 
 
