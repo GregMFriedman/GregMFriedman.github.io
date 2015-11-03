@@ -186,3 +186,61 @@ The main point of this project was to explore different types of classification 
 After writing my own grid-search algorithm (Sklearn's took too long to run and didn't give me the output the way I wanted), I was able to predict level of education with an average of 85% accuracy (no lower than 78% accuracy in any course and as high as 94% in some courses).  Equipped with this fairly accurate predictor, I decided to impute whether or not a student had at least a Bachelor's degree for most of the rows for which Level of Education was previously missing.  This helped me salvage about 10% of my data set overall.  More importantly, for some of the MOOCs, imputing allowed me to restore over 25% of the incomplete data, which in turn greatly improved my prediction accuracy for student grades in those courses.
 
 
+<style>
+
+body {
+  font: 14px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.x.axis path {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+.bar:hover {
+  fill: orangered ;
+}
+
+
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
+</style>
+
