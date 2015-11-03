@@ -61,7 +61,7 @@ var svg = d3.select("#dumb").append("svg")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var modelData =
-['Class,Base,G-Model
+'Class,Base,G-Model
 Intro_CompSci_Harv,19.7862454746,57.1877166506
 Justice,47.1685884177,71.5951936552
 Structures,45.7753519608,75.8941235671
@@ -77,7 +77,7 @@ Intro_CompSci_MIT_Spr,73.8903280551,89.0648281706
 Mechanics_Review,84.5439970577,89.718087613
 SolidStateChem_Spring,74.2678806967,89.943978945
 SolidStateChem_Fall,82.8472904661,91.2467070713
-GlobalPoverty,88.2424360125,92.7237244883'];
+GlobalPoverty,88.2424360125,92.7237244883';
 
 
  d3.csv(modelData, function(error, data) {
